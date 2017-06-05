@@ -5,6 +5,13 @@
  */
 package ia;
 
+import ia.db1.KMeans1;
+import ia.db2.KMeans2;
+import java.util.ArrayList;
+import java.util.Random;
+
+
+
 /**
  *
  * @author lorraine
@@ -15,9 +22,13 @@ public class IA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        KMeans kmeans = new KMeans();
-    	kmeans.init();
-    	kmeans.calculate();
+//        KMeans1 kmeans1 = new KMeans1();
+//    	kmeans1.init();
+//    	kmeans1.calculate();
+
+        KMeans2 kmeans2 = new KMeans2();
+    	kmeans2.init();
+    	kmeans2.calculate();
     }
     
 }
