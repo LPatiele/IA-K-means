@@ -66,35 +66,29 @@ public class Amostra {
     protected double distance(Amostra centroide) {
         double val;
         val = Math.sqrt(Math.pow((this.a - centroide.a), 2) + Math.pow((this.p - centroide.p), 2) + Math.pow((this.c - centroide.c), 2) + Math.pow((this.lk - centroide.lk), 2) + Math.pow((this.wk - centroide.wk), 2) + Math.pow((this.ac - centroide.ac), 2) + Math.pow((centroide.lkg - this.lkg), 2));
-        System.out.println("val: " + val);
+//       System.out.println("val: " + val);
         return val;
     }
 
     //Cria lista de pontos
     protected static ArrayList<Amostra> createPoints() {
         ArrayList<Amostra> pontos = new ArrayList();
-
-        //ler o arquivo
-        //System.out.printf("\nConteúdo do arquivo texto:\n");      
         try {
             FileReader arq = new FileReader("/home/lorraine/Documentos/IA/seeds_dataset.txt");
             BufferedReader lerArq = new BufferedReader(arq);
 
             String linha = lerArq.readLine(); // lê a primeira linha
-            // a variável "linha" recebe o valor "null" quando o processo
-            // de repetição atingir o final do arquivo texto
             while (linha != null) {
                 String array[] = new String[8];
                 array = linha.split("\\s");
                 try {
-                    pontos.add(new Amostra(Double.parseDouble(array[0]) ,Double.parseDouble(array[1]) , Double.parseDouble(array[2]) , Double.parseDouble(array[3]), Double.parseDouble(array[4]) , Double.parseDouble(array[5]) , Double.parseDouble(array[6]) , Integer.parseInt(array[7])));
-                   // System.out.println(Double.parseDouble(array[0]) + "," + Double.parseDouble(array[1]) + "," + Double.parseDouble(array[2]) + "," + Double.parseDouble(array[3]) + "," + Double.parseDouble(array[4]) + "," + Double.parseDouble(array[5]) + "," + Double.parseDouble(array[6]) + "," + Integer.parseInt(array[7]));
+                    pontos.add(new Amostra(Double.parseDouble(array[0]), Double.parseDouble(array[1]), Double.parseDouble(array[2]), Double.parseDouble(array[3]), Double.parseDouble(array[4]), Double.parseDouble(array[5]), Double.parseDouble(array[6]), Integer.parseInt(array[7])));
+                    // System.out.println(Double.parseDouble(array[0]) + "," + Double.parseDouble(array[1]) + "," + Double.parseDouble(array[2]) + "," + Double.parseDouble(array[3]) + "," + Double.parseDouble(array[4]) + "," + Double.parseDouble(array[5]) + "," + Double.parseDouble(array[6]) + "," + Integer.parseInt(array[7]));
                 } catch (NumberFormatException ex) {
                     System.err.println("Erro :");
                     System.err.printf("%s\n", linha);
                 }
 
-//               System.out.printf("%s\n", linha);
                 linha = lerArq.readLine(); // lê da segunda até a última linha
             }
             arq.close();
@@ -102,8 +96,6 @@ public class Amostra {
             System.err.printf("Erro na abertura do arquivo: %s.\n",
                     e.getMessage());
         }
-        // System.out.println();
-
         return pontos;
     }
 

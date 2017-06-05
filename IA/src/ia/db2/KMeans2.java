@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ia.db2;
 
 import java.util.ArrayList;
@@ -14,8 +9,8 @@ import java.util.List;
  */
 public class KMeans2 {
 
-    //Number of Clusters. This metric should be related to the number of points
-    private int NUM_CLUSTERS = 3;
+    //Numero de clusters
+    private int k = 3;
 
     private ArrayList<Amostra> points;
     private ArrayList<Cluster2> clusters;
@@ -25,68 +20,59 @@ public class KMeans2 {
         this.clusters = new ArrayList();
     }
 
-//    public static void main(String[] args) {
-//    	
-//    	KMeans2 kmeans = new KMeans2();
-//    	kmeans.init();
-//    	kmeans.calculate();
-//    }
-    //Initializes the process
+    //Initializações
     public void init() {
-        //Create Points
+        //Creia os pontos
         points = Amostra.createPoints();
 
-        //Create Clusters
-        //Set Random Centroids
-        for (int i = 0; i < NUM_CLUSTERS; i++) {
+        //Cria e inicializa os clusters
+        for (int i = 0; i < k; i++) {
             Cluster2 cluster = new Cluster2(i);
             Amostra centroid = new Amostra();
             cluster.setCentroid(centroid);
             clusters.add(cluster);
         }
 
-        //Print Initial state
+        //Print Inicial
         plotClusters();
     }
 
     private void plotClusters() {
-        for (int i = 0; i < NUM_CLUSTERS; i++) {
+        for (int i = 0; i < k; i++) {
             Cluster2 c = clusters.get(i);
             c.plotCluster();
         }
     }
 
-    //The process to calculate the K Means, with iterating method.
+    //Calcula o processo k-means
     public void calculate() {
         boolean finish = false;
         int iteration = 0;
 
-        // Add in new data, one at a time, recalculating centroids with each new one. 
+        //Adiciona novos dados, um por vez, recalculando centróides
         while (!finish) {
-            //Clear cluster state
             clearClusters();
 
             ArrayList<Amostra> lastCentroids = getCentroids();
-            System.out.println("antigos:" + lastCentroids);
+//            System.out.println("antigos:" + lastCentroids);
 
-            //Assign points to the closer cluster
+            //Atribuir pontos ao cluster mais próximo
             assignCluster();
 
-            //Calculate new centroids.
+            //Calcula novos centroides
             calculateCentroids();
 
             iteration++;
 
             ArrayList<Amostra> currentCentroids = getCentroids();
-            System.out.println("novos: " + currentCentroids);
+//            System.out.println("novos: " + currentCentroids);
 
-            //Calculates total distance between new and old Centroids
+            //Calcule a distância total entre os centroides novos e antigos
             double distance = 0;
             for (int i = 0; i < lastCentroids.size(); i++) {
                 distance += lastCentroids.get(i).distance(currentCentroids.get(i));
-                System.out.println("calcula");
             }
-            System.out.println("#################");
+            System.out.println("###################################################");
             System.out.println("Iteração: " + iteration);
             System.out.println("Distancia dos centroides: " + distance);
             plotClusters();
@@ -104,7 +90,7 @@ public class KMeans2 {
     }
 
     private ArrayList<Amostra> getCentroids() {
-        ArrayList<Amostra> centroids = new ArrayList(NUM_CLUSTERS);
+        ArrayList<Amostra> centroids = new ArrayList(k);
         for (Cluster2 cluster : clusters) {
             Amostra aux = cluster.getCentroid();
             Amostra aux2 = new Amostra();
@@ -128,7 +114,7 @@ public class KMeans2 {
 
         for (Amostra point : points) {
             min = max;
-            for (int i = 0; i < NUM_CLUSTERS; i++) {
+            for (int i = 0; i < k; i++) {
                 Cluster2 c = clusters.get(i);
                 distance = point.distance(c.getCentroid());
                 if (distance < min) {
@@ -166,7 +152,7 @@ public class KMeans2 {
             }
 
             Amostra centroid = cluster.getCentroid();
-            if (n_points < 0) {
+            if (n_points > 0) {
                 centroid.a = a / n_points;
                 centroid.p = p / n_points;
                 centroid.c = c / n_points;
@@ -174,7 +160,6 @@ public class KMeans2 {
                 centroid.wk = wk / n_points;
                 centroid.ac = ac / n_points;
                 centroid.lkg = lkg / n_points;
-
             }
         }
     }

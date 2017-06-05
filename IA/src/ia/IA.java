@@ -22,10 +22,14 @@ public class IA {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        //execução da primeira base de dados
 //        KMeans1 kmeans1 = new KMeans1();
 //    	kmeans1.init();
 //    	kmeans1.calculate();
 
+        
+        //execução da segunda base de dados
         KMeans2 kmeans2 = new KMeans2();
     	kmeans2.init();
     	kmeans2.calculate();
