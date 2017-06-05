@@ -67,7 +67,7 @@ public class Balanca {
         ArrayList<Balanca> pontos = new ArrayList();
 
         try {
-            FileReader arq = new FileReader("/home/lorraine/Documentos/IA/balance-scale.txt");
+            FileReader arq = new FileReader("src/balance-scale.txt");
             BufferedReader lerArq = new BufferedReader(arq);
 
             String linha = lerArq.readLine(); // lê a primeira linha

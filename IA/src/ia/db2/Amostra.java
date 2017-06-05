@@ -74,7 +74,7 @@ public class Amostra {
     protected static ArrayList<Amostra> createPoints() {
         ArrayList<Amostra> pontos = new ArrayList();
         try {
-            FileReader arq = new FileReader("/home/lorraine/Documentos/IA/seeds_dataset.txt");
+            FileReader arq = new FileReader("src/seeds_dataset.txt");
             BufferedReader lerArq = new BufferedReader(arq);
 
             String linha = lerArq.readLine(); // lê a primeira linha
